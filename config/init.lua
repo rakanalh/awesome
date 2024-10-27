@@ -1,0 +1,8 @@
+require "config.theme"
+require "config.layouts"
+require "config.mousebindings"
+require "config.keybindings"
+require "config.rules"
+require "config.autofocus"
+require "config.floating-clients"
+require "config.monitor"
