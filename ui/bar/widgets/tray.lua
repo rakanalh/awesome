@@ -8,7 +8,7 @@ local dpi = beautiful.xresources.apply_dpi
 
 -- listens for requests to open/hide the systray popup in the focused screen ofc.
 local function get_tray()
-    return awful.screen.focused().tray
+    return screen.primary.tray
 end
 
 awesome.connect_signal('tray::toggle', function ()
@@ -23,64 +23,63 @@ awesome.connect_signal('tray::visibility', function (v)
     end
 end)
 
-awful.screen.connect_for_each_screen(function (s)
-    s.tray = {}
+local s = screen.primary
+screen.primary.tray = {}
 
-    s.tray.widget = wibox.widget {
+s.tray.widget = wibox.widget {
+    {
         {
             {
-                {
-                    widget = wibox.widget.systray,
-                    horizontal = false,
-                    screen = s,
-                    base_size = 25,
-                },
-                layout = wibox.layout.fixed.horizontal,
+                widget = wibox.widget.systray,
+                horizontal = false,
+                screen = s,
+                base_size = 25,
             },
-            margins = dpi(12),
-            widget = wibox.container.margin,
+            layout = wibox.layout.fixed.horizontal,
         },
-        bg = beautiful.bg_normal,
-        fg = beautiful.fg_normal,
-        widget = wibox.container.background,
-        shape = helpers.mkroundedrect(),
-    }
+        margins = dpi(12),
+        widget = wibox.container.margin,
+    },
+    bg = beautiful.bg_normal,
+    fg = beautiful.fg_normal,
+    widget = wibox.container.background,
+    shape = helpers.mkroundedrect(),
+}
 
-    s.tray.popup = awful.popup {
-        widget = s.tray.widget,
-        screen = s,
-        visible = false,
-        ontop = true,
-        bg = beautiful.bg_normal .. '00',
-        fg = beautiful.fg_normal,
-        minimum_width = dpi(200),
-        minimum_height = dpi(150),
-        shape = helpers.mkroundedrect(),
-        placement = function (d)
-            return awful.placement.bottom_right(d, {
-                margins = {
-                    right = beautiful.useless_gap * 33,
-                    bottom = beautiful.bar_height + beautiful.useless_gap * 2,
-                }
-            })
-        end,
-    }
+s.tray.popup = awful.popup {
+    widget = s.tray.widget,
+    screen = s,
+    visible = false,
+    ontop = true,
+    bg = beautiful.bg_normal .. '00',
+    fg = beautiful.fg_normal,
+    minimum_width = dpi(300),
+    minimum_height = dpi(50),
+    shape = helpers.mkroundedrect(),
+    placement = function (d)
+        return awful.placement.bottom_right(d, {
+            margins = {
+                right = beautiful.useless_gap * 33,
+                bottom = beautiful.bar_height + beautiful.useless_gap * 2,
+            }
+        })
+    end,
+}
 
-    local self, tray = s.tray.popup, s.tray
+local self, tray = s.tray.popup, s.tray
 
-    function tray.toggle ()
-        if self.visible then
-            tray.hide()
-        else
-            tray.show()
-        end
+function tray.toggle ()
+    if self.visible then
+        tray.hide()
+    else
+        tray.show()
     end
+end
 
-    function tray.show ()
-        self.visible = true
-    end
+function tray.show ()
+    self.visible = true
+end
 
-    function tray.hide ()
-        self.visible = false
-    end
-end)
+function tray.hide ()
+    self.visible = false
+end
