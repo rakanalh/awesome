@@ -25,6 +25,7 @@ function autostart.run()
 	awful.spawn.with_shell("nm-applet")
 	awful.spawn.with_shell("flameshot")
 	awful.spawn.with_shell("volctl")
+	awful.spawn.with_shell("xautolock -time 10 -locker 'i3lock-fancy-multimonitor -b=0x3'")
 
 	-- apps
 	awful.spawn.with_shell("firefox")
