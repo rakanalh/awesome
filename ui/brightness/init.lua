@@ -90,22 +90,12 @@ awful.screen.connect_for_each_screen(function (s)
     end
 
     function s.brightness.show()
-        if not PlayerctlSignal then
-            PlayerctlSignal = require 'modules.bling'.signal.playerctl.lib()
-        end
-        if not PlayerctlCli then
-            PlayerctlCli = require 'modules.bling'.signal.playerctl.cli()
-        end
         self.widget = mkwidget()
         self.visible = true
     end
 
     function s.brightness.hide()
         self.visible = false
-        if PlayerctlCli then
-            PlayerctlCli:disable()
-            PlayerctlCli = nil
-        end
         self.widget = wibox.widget {
             bg = beautiful.bg_normal,
             widget = wibox.container.background
