@@ -24,6 +24,7 @@ function autostart.run()
 	awful.spawn.with_shell("mpDris2")
 	awful.spawn.with_shell("nm-applet")
 	awful.spawn.with_shell("flameshot")
+	awful.spawn.with_shell("volctl")
 
 	-- apps
 	awful.spawn.with_shell("firefox")
