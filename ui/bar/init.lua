@@ -11,7 +11,6 @@ local get_screenshot_icon = require 'ui.bar.widgets.screenshot'
 
 require 'ui.bar.widgets.calendar'
 require 'ui.bar.widgets.tray'
-require 'ui.powermenu'
 
 screen.connect_signal('request::desktop_decoration', function (s)
     awful.tag(
@@ -217,7 +216,7 @@ screen.connect_signal('request::desktop_decoration', function (s)
 
     powerbutton:add_button(awful.button({}, 1, function ()
         powerbutton_tooltip.hide()
-        awesome.emit_signal('powermenu::toggle')
+        awful.spawn("/home/rakan/.config/rofi/powermenu/type-2/powermenu.sh")
     end))
 
     local function mkcontainer(template)
