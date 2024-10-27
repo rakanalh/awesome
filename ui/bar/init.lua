@@ -7,7 +7,6 @@ local helpers = require 'helpers'
 local dpi = beautiful.xresources.apply_dpi
 
 local brightness = require 'ui.bar.widgets.brightness'
-local volume = require 'ui.bar.widgets.volume'
 local get_screenshot_icon = require 'ui.bar.widgets.screenshot'
 
 require 'ui.bar.widgets.calendar'
@@ -94,7 +93,6 @@ screen.connect_signal('request::desktop_decoration', function (s)
 
     tray_dispatcher:add_button(awful.button({}, 1, function ()
         awesome.emit_signal('tray::toggle')
-        tray_dispatcher_tooltip.hide()
 
         if s.tray.popup.visible then
             tray_dispatcher.image = beautiful.tray_chevron_down
@@ -109,7 +107,6 @@ screen.connect_signal('request::desktop_decoration', function (s)
     local actions_icons_container = helpers.mkbtn({
         {
             brightness,
-            volume,
             s.myscreenshot_action_icon,
             spacing = dpi(15),
             layout = wibox.layout.fixed.horizontal,
