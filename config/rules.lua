@@ -53,7 +53,7 @@ local function setup_rules ()
 		}
 		ruled.client.append_rule {
 			rule = { class = "firefox" },
-			properties = { screen = screen_primary, tag = screen.primary.tags[1] },
+			properties = { tag = screen.primary.tags[1] },
 		}
 		ruled.client.append_rule {
 			rule = { class = "qutebrowser" },
