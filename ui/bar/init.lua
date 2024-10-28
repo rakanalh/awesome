@@ -7,7 +7,9 @@ local helpers = require 'helpers'
 local dpi = beautiful.xresources.apply_dpi
 
 local brightness = require 'ui.bar.widgets.brightness'
-local get_screenshot_icon = require 'ui.bar.widgets.screenshot'
+local screenshots = require 'ui.bar.widgets.screenshot'
+local notifications = require 'ui.bar.widgets.notifications'
+local keyboard_layout = require 'ui.bar.widgets.keyboard_layout'
 
 require 'ui.bar.widgets.calendar'
 require 'ui.bar.widgets.tray'
@@ -101,12 +103,14 @@ screen.connect_signal('request::desktop_decoration', function (s)
     end))
 
     -- make screenshot action icon global to edit it in anothers contexts.
-    s.myscreenshot_action_icon = get_screenshot_icon(s)
+    s.myscreenshot_action_icon = screenshots(s)
 
     local actions_icons_container = helpers.mkbtn({
         {
+            keyboard_layout,
             brightness,
             s.myscreenshot_action_icon,
+            -- notifications,
             spacing = dpi(15),
             layout = wibox.layout.fixed.horizontal,
         },

@@ -24,7 +24,7 @@ awesome.connect_signal('tray::visibility', function (v)
 end)
 
 local s = screen.primary
-screen.primary.tray = {}
+screen.primary.tray = {visible = false}
 
 s.tray.widget = wibox.widget {
     {
