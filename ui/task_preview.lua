@@ -6,8 +6,8 @@ local wibox = require 'wibox'
 local dpi = xresources.apply_dpi
 
 bling.widget.task_preview.enable {
-    height = dpi(300),
-    width = dpi(300),
+    height = dpi(400),
+    width = dpi(400),
     placement_fn = function (c)
         awful.placement.bottom(c, {
             margins = {

@@ -59,9 +59,9 @@ local function set_keybindings()
     -- Media keys
     awful.keyboard.append_global_keybindings(
 		{
-			awful.key({}, "XF86AudioRaiseVolume", volume_raise, { description = "Increase volume", group = "Volume control" }),
-			awful.key({}, "XF86AudioLowerVolume", volume_lower, { description = "Reduce volume", group = "Volume control" }),
-			awful.key({}, "XF86AudioMute", volume_mute, { description = "Mute audio", group = "Volume control" }),
+			awful.key({}, "XF86AudioRaiseVolume", function() awesome.spawn('pulseaudio-ctl up') end, { description = "Increase volume", group = "Volume control" }),
+			awful.key({}, "XF86AudioLowerVolume", function() awesome.spawn('pulseaudio-ctl down') end, { description = "Reduce volume", group = "Volume control" }),
+			awful.key({}, "XF86AudioMute", function() awesome.spawn('pulseaudio-ctl mute') end, { description = "Mute audio", group = "Volume control" }),
 		}
     )
 

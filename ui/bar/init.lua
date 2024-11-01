@@ -72,14 +72,14 @@ screen.connect_signal('request::desktop_decoration', function (s)
             },
             id = "background_role",
             widget = wibox.container.background,
-            create_callback = function (self, c, _, _)
-                self:connect_signal('mouse::enter', function ()
-                    awesome.emit_signal('bling::task_preview::visibility', s, true, c)
-                end)
-                self:connect_signal('mouse::leave', function ()
-                    awesome.emit_signal('bling::task_preview::visibility', s, false, c)
-                end)
-            end
+            -- create_callback = function (self, c, _, _)
+            --     self:connect_signal('mouse::enter', function ()
+            --         awesome.emit_signal('bling::task_preview::visibility', s, true, c)
+            --     end)
+            --     self:connect_signal('mouse::leave', function ()
+            --         awesome.emit_signal('bling::task_preview::visibility', s, false, c)
+            --     end)
+            -- end
         },
     }
 
