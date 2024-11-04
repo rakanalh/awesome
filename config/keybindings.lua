@@ -9,6 +9,10 @@ local function move_to_screen(dir)
 		end
 	end
 end
+local brightness = function(value)
+	local command = string.format("brightnessctl set %s", value)
+	awful.spawn(command)
+end
 
 local function set_keybindings()
     awful.keyboard.append_global_keybindings(
@@ -59,9 +63,11 @@ local function set_keybindings()
     -- Media keys
     awful.keyboard.append_global_keybindings(
 		{
-			awful.key({}, "XF86AudioRaiseVolume", function() awesome.spawn('pulseaudio-ctl up') end, { description = "Increase volume", group = "Volume control" }),
-			awful.key({}, "XF86AudioLowerVolume", function() awesome.spawn('pulseaudio-ctl down') end, { description = "Reduce volume", group = "Volume control" }),
-			awful.key({}, "XF86AudioMute", function() awesome.spawn('pulseaudio-ctl mute') end, { description = "Mute audio", group = "Volume control" }),
+			awful.key({}, "XF86AudioRaiseVolume", function() awesome.spawn('pactl set-sink-volume @DEFAULT_SINK@ +5%') end, { description = "Increase volume", group = "Volume control" }),
+			awful.key({}, "XF86AudioLowerVolume", function() awesome.spawn('pactl set-sink-volume @DEFAULT_SINK@ -5%') end, { description = "Reduce volume", group = "Volume control" }),
+			awful.key({}, "XF86AudioMute", function() awesome.spawn('pactl set-sink-mute @DEFAULT_SINK@ toggle') end, { description = "Mute audio", group = "Volume control" }),
+            awful.key({}, "XF86MonBrightnessUp", function() brightness("+5") end, { description = "Increase brightness", group = "Brightness control" }),
+			awful.key({}, "XF86MonBrightnessDown", function() brightness("5-") end, { description = "Reduce brightness", group = "Brightness control" }),
 		}
     )
 
